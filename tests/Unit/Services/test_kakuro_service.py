@@ -1,15 +1,8 @@
 import pytest
 
+from Fixtures.sample_puzzles import SAMPLE_PUZZLE_GRID
 from src.Models.kakuro_model import KakuroModel
 from src.Services.kakuro_service import KakuroService
-
-SAMPLE_PUZZLE_GRID = [
-    ["X",       (21, None), (6, None),  (5, None),  (10, None)],
-    [(None,21), 9,          None,       None,       None],
-    [(None, 6), None,       (4, 4),     None,       None],
-    [(None, 7), None,       None,       (7, 1),     None],
-    [(None,14), None,       None,       None,       None],
-]
 
 MODEL = KakuroModel(SAMPLE_PUZZLE_GRID)
 SERVICE = KakuroService(MODEL)
