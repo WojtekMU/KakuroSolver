@@ -12,10 +12,10 @@ SAMPLE_PUZZLE_GRID = [
 ]
 
 MODEL = KakuroModel(SAMPLE_PUZZLE_GRID)
-KakuroService.MIN_VALUE = 1
-KakuroService.MAX_VALUE = 9
-KakuroService.MAX_SUM = 45
 SERVICE = KakuroService(MODEL)
+SERVICE.MIN_VALUE = 1
+SERVICE.MAX_VALUE = 9
+SERVICE.MAX_SUM = 45
 
 
 def test_get_cells_in_clue_vertical():
