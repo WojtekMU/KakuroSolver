@@ -1,3 +1,5 @@
+import copy
+
 import pytest
 from ortools.linear_solver import pywraplp
 
@@ -7,7 +9,7 @@ from src.Services.kakuro_service import KakuroService
 from src.Solvers.binary_integer_solver import BinaryIntegerSolver
 
 def test_create_variables():
-    model = KakuroModel(SAMPLE_PUZZLE_GRID)
+    model = KakuroModel(copy.deepcopy(SAMPLE_PUZZLE_GRID))
     service = KakuroService(model)
 
     solver = pywraplp.Solver.CreateSolver('SCIP')
@@ -18,7 +20,7 @@ def test_create_variables():
     assert len(variables[(4, 1)]) == 8
 
 def test_create_clue_constraint_adds_constraints():
-    model = KakuroModel(SAMPLE_PUZZLE_GRID)
+    model = KakuroModel(copy.deepcopy(SAMPLE_PUZZLE_GRID))
     service = KakuroService(model)
 
     solver = pywraplp.Solver.CreateSolver('SCIP')
@@ -31,7 +33,7 @@ def test_create_clue_constraint_adds_constraints():
     assert solver.NumConstraints() == 9
 
 def test_create_constraints_applies_all_rules():
-    model = KakuroModel(SAMPLE_PUZZLE_GRID)
+    model = KakuroModel(copy.deepcopy(SAMPLE_PUZZLE_GRID))
     service = KakuroService(model)
 
     solver = pywraplp.Solver.CreateSolver('SCIP')
@@ -44,7 +46,7 @@ def test_create_constraints_applies_all_rules():
 
 
 def test_binary_integer_solver():
-    model = KakuroModel(SAMPLE_PUZZLE_GRID)
+    model = KakuroModel(copy.deepcopy(SAMPLE_PUZZLE_GRID))
     service = KakuroService(model)
 
     expected_grid = [
@@ -62,7 +64,7 @@ def test_binary_integer_solver():
     assert expected_grid == service.model.grid
 
 def test_binary_integer_solver_no_solution():
-    model = KakuroModel(SAMPLE_PUZZLE_GRID_NO_SOLUTION)
+    model = KakuroModel(copy.deepcopy(SAMPLE_PUZZLE_GRID_NO_SOLUTION))
     service = KakuroService(model)
 
     solver = BinaryIntegerSolver()
