@@ -2,17 +2,13 @@ import json
 import tempfile
 import pytest
 
+from Fixtures.sample_puzzles import SAMPLE_PUZZLE_GRID_SMALL
 from src.Loaders.kakuro_loader import load_puzzle_from_path
 
-SAMPLE_PUZZLE = [
-    ["X", "X", [12, None]],
-    ["X", [3, 4], 4],
-    [[None, 11], None, None]
-]
 
 def test_load_puzzle_success():
     with tempfile.NamedTemporaryFile(mode="w+", delete=False) as tmp_file:
-        json.dump(SAMPLE_PUZZLE, tmp_file)
+        json.dump(SAMPLE_PUZZLE_GRID_SMALL, tmp_file)
         tmp_file_path = tmp_file.name
 
     loaded_puzzle = load_puzzle_from_path(tmp_file_path)
